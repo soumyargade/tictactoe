@@ -122,6 +122,7 @@ while True:
     ready = input( "Are you ready to play? Enter Yes or No: " )
     print( '\n' )
     while ready == 'Yes':
+    	print( '\n' * 100 )
     	display_board( board )
     	# PLAYER ONE TURN
     	if player1_turn:
@@ -132,14 +133,13 @@ while True:
     		player1_position = player_choice( board )
     		place_marker( board, player1_mark, player1_position )
     		if win_check( board, player1_mark ):
-    			print( '\n' )
+    			print( '\n' * 100 )
     			display_board( board )
     			print( '\n' )
     			print( 'PLAYER ONE WINS' )
     			break
-    		print( '\n' )
+    		print( '\n' * 100 )
     		display_board( board )
-    		print( '\n' )
     		player1_turn = False
     		player2_turn = True
     	if player2_turn:
@@ -150,12 +150,11 @@ while True:
     		player2_position = player_choice( board )
     		place_marker( board, player2_mark, player2_position )
     		if win_check( board, player2_mark ):
-    			print( '\n' )
+    			print( '\n' * 100 )
     			display_board( board )
     			print( '\n' )
     			print( 'PLAYER TWO WINS' )
     			break
-    		print( '\n' )
     		player2_turn = False
     		player1_turn = True
     if not replay():
