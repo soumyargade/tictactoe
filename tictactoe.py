@@ -3,6 +3,7 @@ import random
 
 # PRINTS OUT BOARD AS A NUMPAD
 def display_board( board ):
+	print( '\n' * 100 )
 	print( "   |   |  " )
 	print( f" { board[ 7 ] } | { board[ 8 ] } | { board[ 9 ] } " )
 	print( "   |   |  " )
@@ -18,12 +19,12 @@ def display_board( board ):
 # TAKES IN A PLAYER INPUT AND ASSIGNS THEIR MARKER AS 'X' OR 'O'
 def player_input():
     player1_marker = ''
-    while player1_marker != 'X' or player1_marker != 'O':
+    while player1_marker.upper() != 'X' or player1_marker.upper() != 'O':
         player1_marker = input('Player 1: Do you want to be X or O? ')
-        if player1_marker == 'X' or player1_marker == 'O':
+        if player1_marker.upper() == 'X' or player1_marker.upper() == 'O':
             break
         print( "Invalid input, please pick 'X' or 'O'." )
-    return player1_marker
+    return player1_marker.upper()
 
 # ASSIGNS MARKER TO POSITION ON THE BOARD
 def place_marker( board, marker, position ):
@@ -101,13 +102,12 @@ def replay():
 def control_flow( board, mark ):
 	while True:
 		if full_board_check( board ):
-			print( 'ITS A TIE' )
+			print( "It's a tie!" )
 			return 1
 		print( '\n' )
 		position = player_choice( board )
 		place_marker( board, mark, position )
 		if win_check( board, mark ):
-			print( '\n' * 100 )
 			display_board( board )
 			print( 'Congratulations! You have won the game!' )
 			return 1
@@ -137,8 +137,7 @@ while True:
     	player2_turn = True
     ready = input( "Are you ready to play? Enter Yes or No: " )
     # GAME HAS BEGUN
-    while ready == 'Yes':
-    	print( '\n' * 100 )
+    while ready.upper() == 'YES':
     	display_board( board )
     	# PLAYER ONE'S TURN
     	if player1_turn:
