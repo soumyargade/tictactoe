@@ -97,20 +97,37 @@ def replay():
 	restart = input( "Do you want to play again? Enter Yes or No: " )
 	return restart == 'Yes'
 
+# WHAT TAKES PLACE DURING EACH PLAYER'S TURN
+def control_flow( board, mark ):
+	while True:
+		if full_board_check( board ):
+			print( 'ITS A TIE' )
+			return 1
+		print( '\n' )
+		position = player_choice( board )
+		place_marker( board, mark, position )
+		if win_check( board, mark ):
+			print( '\n' * 100 )
+			display_board( board )
+			print( 'Congratulations! You have won the game!' )
+			return 1
+		print( '\n' * 100 )
+		display_board( board )
+		break
+
 ### MAIN CONTROL FLOW OF THE GAME ###
-print('Welcome to Tic Tac Toe!')
+print( 'Welcome to Tic Tac Toe!' )
 while True:
-    # SET THE GAME UP HERE
+    # SETTING UP THE GAME UP HERE
     board = [ '#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ]
-    player1_mark = ''
     player2_mark = ''
     player1_mark = player_input()
-    # print( f'Player 1 Mark: {player1_mark}' )
+    # ASSIGNING PLAYER MARKS
     if player1_mark == "X":
     	player2_mark = 'O'
     else:
     	player2_mark = 'X'
-    # print( f'Player 2 Mark: {player2_mark}' )
+    # DECIDING WHO GOES FIRST
     first_player = choose_first()
     player1_turn = False
     player2_turn = False
@@ -118,44 +135,23 @@ while True:
     	player1_turn = True
     else:
     	player2_turn = True
-    print( '\n' )
     ready = input( "Are you ready to play? Enter Yes or No: " )
-    print( '\n' )
+    # GAME HAS BEGUN
     while ready == 'Yes':
     	print( '\n' * 100 )
     	display_board( board )
-    	# PLAYER ONE TURN
+    	# PLAYER ONE'S TURN
     	if player1_turn:
-    		if full_board_check( board ):
-    			print( 'ITS A TIE' )
+    		if control_flow( board, player1_mark ) == 1:
     			break
-    		print( '\n' )
-    		player1_position = player_choice( board )
-    		place_marker( board, player1_mark, player1_position )
-    		if win_check( board, player1_mark ):
-    			print( '\n' * 100 )
-    			display_board( board )
-    			print( '\n' )
-    			print( 'PLAYER ONE WINS' )
-    			break
-    		print( '\n' * 100 )
-    		display_board( board )
     		player1_turn = False
     		player2_turn = True
+    	# PLAYER TWO'S TURN
     	if player2_turn:
-    		if full_board_check( board ):
-    			print( 'ITS A TIE' )
-    			break
-    		print( '\n' )
-    		player2_position = player_choice( board )
-    		place_marker( board, player2_mark, player2_position )
-    		if win_check( board, player2_mark ):
-    			print( '\n' * 100 )
-    			display_board( board )
-    			print( '\n' )
-    			print( 'PLAYER TWO WINS' )
+    		if control_flow( board, player2_mark ) == 1:
     			break
     		player2_turn = False
     		player1_turn = True
+    # CHECK TO RESTART THE GAME
     if not replay():
     	break
