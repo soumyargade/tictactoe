@@ -111,7 +111,6 @@ def control_flow( board, mark ):
 			display_board( board )
 			print( 'Congratulations! You have won the game!' )
 			return 1
-		print( '\n' * 100 )
 		display_board( board )
 		break
 
